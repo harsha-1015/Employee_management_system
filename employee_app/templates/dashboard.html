@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* General styles */
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #121212; /* Darker black for a modern look */
+            color: #fff; /* White text for high contrast */
+        }
+
+        /* Sidebar styling */
+        .sidebar {
+            width: 240px;
+            padding: 20px;
+            background-color: #1f1f1f; /* Slightly darker background for contrast */
+            color: #fff;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border-right: 2px solid #333; /* Subtle divider */
+        }
+
+        .sidebar .nav {
+            font-size: 18px;
+            font-weight: bold;
+            color: #ccc;
+            margin-bottom: 30px;
+        }
+
+        .sidebar a,
+        .sidebar .logout {
+            color: #bbb;
+            text-decoration: none;
+            padding: 12px 15px;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+        }
+
+        .sidebar a i,
+        .sidebar .logout i {
+            margin-right: 12px;
+        }
+
+        .sidebar a:hover,
+        .sidebar .logout:hover {
+            background-color: #333;
+            color: #fff;
+            border: 2px solid #bbb;
+        }
+
+        /* Header styling */
+        .header {
+            background-color: #1f1f1f;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 25px;
+            position: fixed;
+            top: 0;
+            left: 240px;
+            right: 0;
+            border-bottom: 2px solid #333;
+            z-index: 1000;
+        }
+
+        .header h2 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+            letter-spacing: 1px;
+        }
+
+        .header nav a {
+            margin-left: 25px;
+            text-decoration: none;
+            color: #ccc;
+            font-size: 15px;
+            font-weight: 700;
+            transition: color 0.3s ease;
+        }
+
+        .header nav a:hover {
+            color: #fff;
+        }
+
+        /* Content styling */
+        .content {
+            margin-left: 240px;
+            margin-top: 90px;
+            padding: 20px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            padding: 25px;
+            background: linear-gradient(145deg, #2a2a2a, #444); /* Darker metallic finish */
+            border: 2px solid #444;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 20px rgba(255, 255, 255, 0.1);
+        }
+
+        .card h4 {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 12px;
+            color: #fff;
+            text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.1);
+        }
+
+        .card a {
+            display: inline-block;
+            margin-top: 15px;
+            text-decoration: none;
+            color: #bbb;
+            font-size: 15px;
+            font-weight: 700;
+            transition: color 0.3s ease;
+        }
+
+        .card a:hover {
+            color: #fff;
+        }
+
+        /* Chart container */
+        .chart-container {
+            margin-top: 40px;
+            padding: 20px;
+            background: linear-gradient(145deg, #2a2a2a, #444);
+            border: 3px solid #444;
+            border-radius: 12px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+            height: 400px;
+        }
+
+        .chart-container h3 {
+            margin-bottom: 20px;
+            font-size: 20px;
+            color: #fff;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div>
+            <div class="nav">Welcome, {{ user.username }}</div>
+            <a href="{% url 'dashboard' %}">
+                <i class="fas fa-tachometer-alt"></i> Dashboard
+            </a>
+            <a href="{% url 'employee_list' %}">
+                <i class="fas fa-users"></i> Employees
+            </a>
+            <a href="{% url 'salary' %}">
+                <i class="fas fa-dollar-sign"></i> Salary
+            </a>
+            <a href="{% url 'branch_list' %}">
+                <i class="fas fa-building"></i> Branches
+            </a>
+            <a href="{% url 'users' %}">
+                <i class="fas fa-user"></i> Users
+            </a>
+        </div>
+        <a href="{% url 'login' %}" class="logout">
+            <i class="fas fa-sign-out-alt"></i> Log Out
+        </a>
+    </div>
+
+    <div class="header">
+        <h2>Dashboard</h2>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">Settings</a>
+        </nav>
+    </div>
+
+    <div class="content">
+        <div class="cards">
+            <div class="card">
+                <h4>1</h4>
+                Total Users
+                <a href="#">More info</a>
+            </div>
+            <div class="card">
+                <h4>3</h4>
+                Total Employees
+                <a href="#">More info</a>
+            </div>
+            <div class="card">
+                <h4>2</h4>
+                Total Branches
+                <a href="#">More info</a>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <h3>Salary Chart</h3>
+            <canvas id="salaryChart"></canvas>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const ctx = document.getElementById('salaryChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line', // Changed to line graph
+            data: {
+                labels: ['January', 'February', 'March'],
+                datasets: [{
+                    label: 'Payments',
+                    data: [32000, 28000, 30000],
+                    borderColor: '#fff',
+                    backgroundColor: 'rgba(255, 255, 255, 0.1)', // Transparent background
+                    tension: 0.4, // Smooth curve for the line graph
+                    fill: true,
+                    borderWidth: 2,
+                    pointBackgroundColor: '#fff', // White points on the line
+                    pointRadius: 5
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: '#333'
+                        },
+                        ticks: {
+                            color: '#fff'
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            color: '#fff'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

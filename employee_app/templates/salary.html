@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Salary</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fc;
+            padding: 20px;
+        }
+
+        header {
+            margin-bottom: 20px;
+        }
+
+        header a {
+            background-color: #4CAF50;
+            padding: 10px;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        header a:hover {
+            background-color: #45a049;
+        }
+
+        h1 {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .details-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            margin: auto;
+        }
+
+        .details-container h2 {
+            font-size: 24px;
+            color: #4CAF50;
+            margin-bottom: 10px;
+        }
+
+        .details-container p {
+            font-size: 16px;
+            color: #555;
+            margin: 5px 0;
+        }
+
+        .details-container span {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .button-container a {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .button-container a:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="{% url 'employee_list' %}">Back to Employee List</a>
+    </header>
+
+    <h1>Employee Salary Details</h1>
+
+    <div class="details-container">
+        <h2>{{ employee.name }}</h2>
+        <p><span>Email:</span> {{ employee.email }}</p>
+        <p><span>Mobile No:</span> {{ employee.mobile_no }}</p>
+        <p><span>Designation:</span> {{ employee.designation }}</p>
+        <p><span>Salary:</span> ${{ employee.salary }}</p>
+        <p><span>Joining Date:</span> {{ employee.created_at|date:"d-M-Y" }}</p>
+    </div>
+
+    <div class="button-container">
+        <a href="{% url 'employee_edit' pk=employee.id %}">Edit Employee</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,163 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Employee</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: black;
+            font-family: Arial, sans-serif;
+            color: white;
+        }
+        .form-section {
+            background-color: rgba(0, 0, 0, 0.8);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+        }
+        .form-section h2 {
+            color: #f1c40f;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .input-group-text {
+            background-color: #f1c40f;
+            color: black;
+            border: none;
+        }
+        .btn-primary {
+            background-color: #f1c40f;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #e67e22;
+        }
+        label {
+            font-weight: bold;
+        }
+        .gender-radio {
+            display: flex;
+            gap: 10px;
+            color: white;
+        }
+        .form-control {
+            background-color: #333;
+            color: white;
+            border: 1px solid #444;
+        }
+        .form-control:focus {
+            background-color: #444;
+            color: white;
+        }
+        .form-select {
+            background-color: #333;
+            color: white;
+            border: 1px solid #444;
+        }
+        .form-select:focus {
+            background-color: #444;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="form-section">
+                    <h2>Edit Employee</h2>
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <!-- Name -->
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Name</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                <input type="text" class="form-control" id="name" name="name" value="{{ employee.name }}" required>
+                            </div>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                <input type="email" class="form-control" id="email" name="email" value="{{ employee.email }}" required>
+                            </div>
+                        </div>
+
+                        <!-- Mobile -->
+                        <div class="mb-3">
+                            <label for="mobile_no" class="form-label">Mobile Number</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                <input type="text" class="form-control" id="mobile_no" name="mobile_no" value="{{ employee.mobile_no }}" required pattern="\d{10}" maxlength="10" title="Enter a valid 10-digit number">
+                            </div>
+                        </div>
+
+                        <!-- Designation -->
+                        <div class="mb-3">
+                            <label for="designation" class="form-label">Designation</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-briefcase"></i></span>
+                                <select class="form-select" id="designation" name="designation" required>
+                                    <option value="HR" {% if employee.designation == 'HR' %}selected{% endif %}>HR</option>
+                                    <option value="Manager" {% if employee.designation == 'Manager' %}selected{% endif %}>Manager</option>
+                                    <option value="Sales" {% if employee.designation == 'Sales' %}selected{% endif %}>Sales</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Gender -->
+                        <div class="mb-3">
+                            <label class="form-label">Gender</label>
+                            <div class="gender-radio">
+                                <label><input type="radio" id="male" name="gender" value="Male" {% if employee.gender == 'Male' %}checked{% endif %}> Male</label>
+                                <label><input type="radio" id="female" name="gender" value="Female" {% if employee.gender == 'Female' %}checked{% endif %}> Female</label>
+                                <label><input type="radio" id="others" name="gender" value="Others" {% if employee.gender == 'Others' %}checked{% endif %}> Others</label>
+                            </div>
+                        </div>
+
+                        <!-- Course -->
+                        <div class="mb-3">
+                            <label for="course" class="form-label">Course</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-book"></i></span>
+                                <select class="form-select" id="course" name="course" required>
+                                    <option value="MCA" {% if employee.course == 'MCA' %}selected{% endif %}>MCA</option>
+                                    <option value="AIML" {% if employee.course == 'AIML' %}selected{% endif %}>AIML</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Image -->
+                        <div class="mb-3">
+                            <label for="image" class="form-label">Image Upload</label>
+                            {% if employee.image %}
+                                <img src="{{ employee.image.url }}" alt="Employee Image" width="100">
+                            {% else %}
+                                <p>No image uploaded</p>
+                            {% endif %}
+                            <input type="file" class="form-control" id="image" name="image">
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-primary">Update</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

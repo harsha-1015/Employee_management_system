@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Management System</title>
+    {% load static %}
+    <style>
+        /* General body styling */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            background: #000; /* Black background */
+            color: #fff; /* White text */
+            text-align: center;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            animation: fadeIn 1.5s ease-out;
+        }
+    
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+    
+        /* Header styling */
+        header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+            transform: translateY(-50px);
+            animation: slideIn 1s ease-out forwards;
+        }
+    
+        @keyframes slideIn {
+            0% {
+                transform: translateY(-100px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+    
+        header h1 {
+            margin: 0;
+            font-size: 4em;
+            font-weight: 700;
+            color: #fff; /* White text */
+            text-shadow: 4px 4px 10px #333; /* Subtle shadow */
+            letter-spacing: 2px;
+        }
+    
+        /* Main content box */
+        .content {
+            background: rgba(255, 255, 255, 0.1); /* Transparent white overlay */
+            max-width: 700px;
+            margin: 30px auto;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.7); /* Black shadow */
+            backdrop-filter: blur(10px);
+            transform: translateY(50px);
+            animation: contentSlideUp 1s ease-out forwards;
+        }
+    
+        @keyframes contentSlideUp {
+            0% {
+                transform: translateY(100px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+    
+        .content h2 {
+            color: #ccc; /* Light gray text */
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+    
+        .content p {
+            font-size: 1.2em;
+            line-height: 1.7;
+            color: #ddd; /* Slightly darker gray text */
+        }
+    
+        .content strong {
+            color: #fff; /* White text for emphasis */
+        }
+    
+        /* Button styling */
+        .buttons {
+            margin-top: 30px;
+        }
+    
+        .buttons a {
+            display: inline-block;
+            margin: 15px;
+            padding: 15px 30px;
+            background: linear-gradient(to right, #333, #666); /* Black to dark gray gradient */
+            color: #fff; /* White text */
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 1.2em;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Subtle shadow */
+            transition: all 0.3s ease;
+        }
+    
+        .buttons a:hover {
+            background: linear-gradient(to right, #666, #333); /* Reverse gradient on hover */
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5); /* Enhanced shadow */
+        }
+    
+        /* Footer styling */
+        footer {
+            color: #666; /* Gray text */
+            font-size: 1.1em;
+            padding: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background: #111; /* Darker background */
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.5); /* Subtle top shadow */
+        }
+    
+        footer a {
+            color: #fff; /* White links */
+            text-decoration: none;
+            font-weight: bold;
+        }
+    
+        footer a:hover {
+            text-decoration: underline;
+            color: #ccc; /* Light gray on hover */
+        }
+    </style>
+    
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <h1>Welcome to the Employee Management System</h1>
+    </header>
+
+    <!-- Main Transparent Content Section -->
+    <div class="content">
+        <h2>About the System</h2>
+        <p>
+            Our Employee Management System is designed to streamline the management of employee records, including personal information, job roles, and salary details. It allows for easy updates and tracking of employees' career paths and performances.
+        </p>
+
+        <p>Logged in as: <strong>{{ user.username }}</strong></p>
+
+        <div class="buttons">
+            <a href="{% url 'login' %}">Log In</a>
+            <a href="{% url 'employee_list' %}">Employee List</a>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+        &copy; 2024 Employee Management System. All rights reserved.
+    </footer>
+</body>
+</html>

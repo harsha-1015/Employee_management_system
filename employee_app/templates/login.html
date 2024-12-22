@@ -1,0 +1,173 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #000; /* Solid black background */
+            background-repeat: no-repeat;
+            background-position: center;
+            overflow: hidden;
+            color: #fff;
+        }
+
+        .login-container {
+            background: rgba(0, 0, 0, 0.8); /* Black with opacity */
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 10px 8px 500px rgba(233, 224, 224, 0.1);
+            text-align: center;
+            width: 400px;
+            backdrop-filter: blur(10px);
+        }
+
+        .login-container h2 {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #fff;
+            border-bottom: 2px solid #fff;
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 20px 15px 50px;
+            border: 2px solid #fff;
+            border-radius: 50px;
+            background: none;
+            color: #fff;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .input-group input:focus {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #aaa;
+        }
+
+        .input-group i {
+            position: absolute;
+            top: 50%;
+            left: 20px;
+            transform: translateY(-50%);
+            color: #fff;
+        }
+
+        .options-group {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .options-group label, 
+        .options-group a {
+            text-decoration: none;
+        }
+
+        .options-group a {
+            color: #aaa;
+            transition: color 0.3s ease;
+        }
+
+        .options-group a:hover {
+            color: #fff;
+        }
+
+        .login-btn {
+            background-color: #fff;
+            color: #000;
+            padding: 15px;
+            width: 100%;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .login-btn:hover {
+            background-color: #aaa;
+            color: #fff;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
+        }
+
+        .register-link {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+            margin-top: 20px;
+            transition: color 0.3s ease;
+        }
+
+        .register-link a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .register-link a:hover {
+            color: #aaa;
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Container -->
+    <div class="login-container">
+        <h2>Login</h2>
+        <form method="POST" action="{% url 'login' %}">
+            {% csrf_token %}
+            <!-- Email Input -->
+            <div class="input-group">
+                <input type="text" name="username" placeholder="Email ID" required>
+                <i class="fas fa-envelope"></i>
+            </div>
+            <!-- Password Input -->
+            <div class="input-group">
+                <input type="password" name="password" placeholder="Password" required>
+                <i class="fas fa-lock"></i>
+            </div>
+            <!-- Options Group -->
+            <div class="options-group">
+                <label><input type="checkbox" name="remember_me"> Remember me</label>
+                <a href="{% url 'password_reset' %}">Forgot Password?</a>
+            </div>
+            <!-- Login Button -->
+            <button type="submit" class="login-btn">Login</button>
+        </form>
+        <p class="register-link">Don't have an account? <a href="{% url 'register' %}">Register</a></p>
+    </div>
+</body>
+</html>

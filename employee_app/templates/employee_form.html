@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Employee</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f4f7fc;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .form-section {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 40px;
+            margin: 50px auto;
+            max-width: 600px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-section h2 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .input-group-text {
+            background-color: #007bff;
+            color: white;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            width: 100%;
+            font-size: 16px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .input-group input,
+        .input-group select,
+        .input-group textarea {
+            box-shadow: none !important;
+        }
+
+        .form-feedback {
+            display: none;
+            font-size: 0.875rem;
+            color: red;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="form-section">
+                    <h2>Add Employee</h2>
+                    <form method="POST" enctype="multipart/form-data" id="employeeForm">
+                        {% csrf_token %}
+
+                        <!-- Name -->
+                        <div class="mb-3">
+                            <label for="id_name" class="form-label">Name</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-person"></i></span>
+                                {{ form.name }}
+                            </div>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="mb-3">
+                            <label for="id_email" class="form-label">Email</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                                {{ form.email }}
+                            </div>
+                            <div id="emailError" class="form-feedback">Please enter a valid email address.</div>
+                        </div>
+
+                        <!-- Mobile -->
+                        <div class="mb-3">
+                            <label for="id_mobile_no" class="form-label">Mobile Number</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-telephone"></i></span>
+                                {{ form.mobile_no }}
+                            </div>
+                        </div>
+
+                        <!-- Gender -->
+                        <div class="mb-3">
+                            <label for="id_gender" class="form-label">Gender</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-gender-ambiguous"></i></span>
+                                {{ form.gender }}
+                            </div>
+                        </div>
+
+                        <!-- Designation -->
+                        <div class="mb-3">
+                            <label for="id_designation" class="form-label">Designation</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-briefcase"></i></span>
+                                {{ form.designation }}
+                            </div>
+                        </div>
+
+                        <!-- Course -->
+                        <div class="mb-3">
+                            <label for="id_course" class="form-label">Course</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-book"></i></span>
+                                {{ form.course }}
+                            </div>
+                        </div>
+
+                        <!-- Image -->
+                        <div class="mb-3">
+                            <label for="id_image" class="form-label">Image</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-image"></i></span>
+                                {{ form.image }}
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-primary" onclick="return validateForm()">Add Employee</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function validateForm() {
+            const emailField = document.getElementById("id_email");
+            const emailError = document.getElementById("emailError");
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (!emailRegex.test(emailField.value)) {
+                emailError.style.display = "block";
+                emailField.focus();
+                return false;
+            } else {
+                emailError.style.display = "none";
+                return true;
+            }
+        }
+    </script>
+</body>
+</html>

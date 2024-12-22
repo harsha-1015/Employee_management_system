@@ -1,0 +1,154 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+    
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #000; /* Sleek black background */
+            color: #fff; /* White text */
+        }
+    
+        .register-container {
+            background: #111; /* Darker black for container */
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5); /* Subtle shadow for depth */
+            text-align: center;
+            width: 350px;
+            border: 2px solid #fff; /* White border for a bold outline */
+        }
+    
+        .register-container img {
+            width: 100px;
+            margin-bottom: 20px;
+            filter: grayscale(100%); /* Black-and-white logo styling */
+        }
+    
+        .register-container h2 {
+            color: #fff; /* White heading */
+            font-size: 28px;
+            margin-bottom: 20px;
+            text-transform: uppercase; /* Bold and strong aesthetic */
+            letter-spacing: 2px; /* Wider spacing for Mustang theme */
+        }
+    
+        .input-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+    
+        .input-group input {
+            width: 100%;
+            padding: 15px 40px 15px 15px;
+            border: 2px solid #fff; /* White border */
+            border-radius: 30px;
+            background: #000; /* Black input background */
+            color: #fff; /* White text */
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+    
+        .input-group input:focus {
+            border-color: #f00; /* Red border on focus, inspired by Mustang’s boldness */
+        }
+    
+        .input-group input::placeholder {
+            color: rgba(255, 255, 255, 0.6); /* Subtle placeholder */
+        }
+    
+        .input-group i {
+            position: absolute;
+            top: 50%;
+            right: 15px;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.6); /* Icon color matching placeholder */
+            font-size: 18px;
+        }
+    
+        .register-btn {
+            background: #f00; /* Bold red button */
+            color: #fff; /* White text */
+            padding: 15px;
+            width: 100%;
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(255, 0, 0, 0.4); /* Red glow effect */
+        }
+    
+        .register-btn:hover {
+            background: #fff; /* White background on hover */
+            color: #f00; /* Red text on hover */
+            box-shadow: 0 6px 15px rgba(255, 255, 255, 0.3); /* Glow effect shifts to white */
+        }
+    
+        .login-link {
+            color: rgba(255, 255, 255, 0.6); /* Subtle text for the link */
+            font-size: 14px;
+            margin-top: 15px;
+        }
+    
+        .login-link a {
+            color: #f00; /* Red text for links */
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+    
+        .login-link a:hover {
+            color: #fff; /* White text on hover */
+            text-decoration: underline;
+        }
+    </style>
+    
+</head>
+<body>
+    <div class="register-container">
+        <img src="{% static 'images/icon.png' %}" alt="Logo">
+        <h2>Register</h2>
+        <form method="POST" action="{% url 'register' %}">
+            {% csrf_token %}
+            <div class="input-group">
+                <input type="text" name="username" placeholder="Username" required>
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="input-group">
+                <input type="email" name="email" placeholder="Email ID" required>
+                <i class="fas fa-envelope"></i>
+            </div>
+            <div class="input-group">
+                <input type="password" name="password1" placeholder="Password" required>
+                <i class="fas fa-lock"></i>
+            </div>
+            <div class="input-group">
+                <input type="password" name="password2" placeholder="Confirm Password" required>
+                <i class="fas fa-lock"></i>
+            </div>
+            <button type="submit" class="register-btn">Register</button>
+        </form>
+        <p class="login-link">Already have an account? <a href="{% url 'login' %}">Login</a></p>
+    </div>
+</body>
+</html>
